@@ -52,3 +52,7 @@ target/
 logs/
 
 dependency-reduced-pom.xml
+
+Transactions2014.csv
+TestTransactions.csv
+DodgyTransactions2015.csv
