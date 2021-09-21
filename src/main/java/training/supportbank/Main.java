@@ -9,7 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Main {
 
@@ -30,7 +32,7 @@ public class Main {
         int i = 0;
         int j = 0;
       //  data = new String[][];
-
+        Set<String> nameSet = new HashSet<String>();
         BufferedReader reader;
         try {
              reader = new BufferedReader(new FileReader("Transactions/Transactions2014.csv"));
@@ -42,25 +44,23 @@ public class Main {
 
 
              while (line != null){
-             //    data[i][j] = line;
-               //  System.out.println(line);
 
-                // j++;
                  String[] splitData = line.split(",");
 
                  Transactions newTran = new Transactions(splitData[0], splitData[1], splitData[2], splitData[3], Double.valueOf(splitData[4]));
+                 nameSet.add(splitData[1]);
+                 nameSet.add(splitData[2]);
                  line = reader.readLine();
-                 System.out.println(newTran);
-               //  System.out.println(splitData);
 
-
-
+//                 System.out.println(newTran);
+               //  System.out.println(splitData)
              }
              reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
        // System.out.println(reader);
+        System.out.println(nameSet);
     }
 
 }
