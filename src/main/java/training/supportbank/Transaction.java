@@ -16,4 +16,20 @@ public class Transaction {
         this.narrative = narrative;
         this.amount = amount;
     }
+    //getters
+    public String getFrom() {
+        return from;
+    }
+    public String getTo() {
+        return to;
+    }
+    public LocalDate getDate() {
+        return date;
+    }
+    public String getNarrative() {
+        return narrative;
+    }
+    public float getAmount() {
+        return amount;
+    }
 }
