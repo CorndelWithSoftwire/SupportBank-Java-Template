@@ -64,7 +64,7 @@ public class Main {
         Scanner myScan = new Scanner(System.in);
         String menuOption = "";
         boolean contLoop = true;
-        while (contLoop = true){
+        while (contLoop = true) {
             System.out.println("Input command:\n - List < Account/All > \n - Quit");
             menuOption = myScan.nextLine();
             // parse comment
@@ -83,11 +83,18 @@ public class Main {
                     for (int i = 0; i < Accounts.size(); i++) {
                         System.out.println(Accounts.get(i).getName() + " " + currency.format(Accounts.get(i).getBalance()));
                     }
+                } else {//specific account
+                    for (int i = 0; i < transactions.size(); i++) {
+                        if (Objects.equals(transactions.get(i).getTo(), myArgs) || Objects.equals(transactions.get(i).getFrom(), myArgs)) {
+                            System.out.println(transactions.get(i).getDate() + "\t" + transactions.get(i).getFrom() + "\t" + transactions.get(i).getTo() + "\t" + transactions.get(i).getNarrative() + "\t" + transactions.get(i).getAmount());
+                        }
+                    }
                 }
-            }else if (Objects.equals(command, "Quit")) {
-                contLoop = false;
-            }else{
-                System.out.println("invalid command");
+                if (Objects.equals(command, "Quit")) {
+                    contLoop = false;
+                } else {
+                    System.out.println("invalid command");
+                }
             }
         }
     }
