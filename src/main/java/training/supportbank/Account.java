@@ -13,5 +13,5 @@ public class Account {
     public String getName() {return name;}
     public float getBalance() {return balance;}
     //method
-    public void Addbal(float amount){this.balance += amount}
+    public void Addbal(float amount){this.balance += amount;}
 }

@@ -34,12 +34,12 @@ public class Main {
                         //check from
                         if (Objects.equals(lineinput[1], Accounts.get(i).getName())) {
                             Fromexists = true;
-                            Accounts.get(i).Addbal(-1*Float.parseFloat(line[4]));
+                            Accounts.get(i).Addbal(-1*Float.parseFloat(lineinput[4]));
                         }
                         //check To
                         if (Objects.equals(lineinput[2], Accounts.get(i).getName())) {
                             Toexists = true;
-                            Accounts.get(i).Addbal(Float.parseFloat(line[4]));
+                            Accounts.get(i).Addbal(Float.parseFloat(lineinput[4]));
                         }
                     }
                     //add new accounts & update balances
@@ -61,7 +61,7 @@ public class Main {
             e.printStackTrace();
         }
         for (int i = 0; i < Accounts.size(); i++) {
-            System.out.println(Accounts.get(i).getName());
+            System.out.println(Accounts.get(i).getName() + " " + Accounts.get(i).getBalance());
         }
     }
 }
