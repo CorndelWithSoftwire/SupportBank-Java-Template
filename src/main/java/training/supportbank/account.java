@@ -2,8 +2,8 @@ package training.supportbank;
 
 public class account {
     //elements
-    protected String name;
-    protected float balance;
+    private String name;
+    private float balance;
     //constructor
     public account (String name, float balance){
         this.name = name;
@@ -11,4 +11,7 @@ public class account {
     }
     //getters
     public String getName() {return name;}
+    public float getBalance() {return balance;}
+    //method
+    public void AddBal(float amount){this.balance += amount;}
 }
