@@ -3,25 +3,25 @@ import java.time.LocalDate;
 public class Transaction {
     //elements
     private LocalDate date;
-    private String from;
-    private String to;
+    private String fromAccount;
+    private String toAccount;
     private String narrative;
     private float amount;
 
     //constructor
     public Transaction(LocalDate date, String from, String to, String narrative, float amount) {
         this.date = date;
-        this.from = from;
-        this.to = to;
+        this.fromAccount = from;
+        this.toAccount = to;
         this.narrative = narrative;
         this.amount = amount;
     }
     //getters
     public String getFrom() {
-        return from;
+        return fromAccount;
     }
     public String getTo() {
-        return to;
+        return toAccount;
     }
     public LocalDate getDate() {
         return date;
