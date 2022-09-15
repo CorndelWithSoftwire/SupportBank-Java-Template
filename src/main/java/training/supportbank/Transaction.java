@@ -29,7 +29,5 @@ public class Transaction {
     public String getNarrative() {
         return narrative;
     }
-    public float getAmount() {
-        return amount;
-    }
+    public float getAmount() {return amount; }
 }

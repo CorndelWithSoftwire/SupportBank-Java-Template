@@ -17,40 +17,51 @@ public class Main {
         //Load CSV
         String line = "";
         boolean firstskipped = false;
-        try{
+        try {
             BufferedReader reader = new BufferedReader(new FileReader("src/main/java/training/supportbank/Transactions2014.csv"));
-            while ((line = reader.readLine()) != null){
-                if (firstskipped){
+            while ((line = reader.readLine()) != null) {
+                if (firstskipped) {
                     //load into transactions
                     String[] lineinput = line.split(",");
                     String[] SplitDate = lineinput[0].split("/");
-                    LocalDate date = LocalDate.of(Integer.valueOf(SplitDate[2]),Integer.valueOf(SplitDate[1]),Integer.valueOf(SplitDate[0]));
-                    Transaction Newtrans = new Transaction(date,lineinput[1],lineinput[2],lineinput[3],Float.parseFloat(lineinput[4]));
+                    LocalDate date = LocalDate.of(Integer.valueOf(SplitDate[2]), Integer.valueOf(SplitDate[1]), Integer.valueOf(SplitDate[0]));
+                    Transaction Newtrans = new Transaction(date, lineinput[1], lineinput[2], lineinput[3], Float.parseFloat(lineinput[4]));
                     transactions.add(Newtrans);
                     //check for new accounts
                     boolean Toexists = false;
                     boolean Fromexists = false;
-                    for (int i = 0; i <Accounts.size();i++){
+                    for (int i = 0; i < Accounts.size(); i++) {
                         //check from
-                        if (Objects.equals(lineinput[1],Accounts.get(i).getName())) {Fromexists = true;}
+                        if (Objects.equals(lineinput[1], Accounts.get(i).getName())) {
+                            Fromexists = true;
+                            Accounts.get(i).Addbal(-1*Float.parseFloat(line[4]));
+                        }
                         //check To
-                        if (Objects.equals(lineinput[2],Accounts.get(i).getName())) {Toexists = true;}
+                        if (Objects.equals(lineinput[2], Accounts.get(i).getName())) {
+                            Toexists = true;
+                            Accounts.get(i).Addbal(Float.parseFloat(line[4]));
+                        }
                     }
-                    //add new accounts
-                    if (!Fromexists){Accounts.add(new Account(lineinput[1],0));}
-                    if (!Toexists){Accounts.add(new Account(lineinput[2],0));}
+                    //add new accounts & update balances
 
-                }else {
+                    if (!Fromexists) {
+                        Accounts.add(new Account(lineinput[1], 0));
+                        Accounts.get(Accounts.size()-1).Addbal(-1*Float.parseFloat(lineinput[4]));
+                    }
+                    if (!Toexists) {
+                        Accounts.add(new Account(lineinput[2], 0));
+                        Accounts.get(Accounts.size()-1).Addbal(Float.parseFloat(lineinput[4]));
+                    }
+
+                } else {
                     firstskipped = true;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i<Accounts.size(); i++){
+        for (int i = 0; i < Accounts.size(); i++) {
             System.out.println(Accounts.get(i).getName());
         }
-        // generating accounts
-
     }
 }
