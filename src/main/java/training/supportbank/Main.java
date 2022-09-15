@@ -6,12 +6,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String args[]) {
-        // Your code here!
-        System.out.println("Test!");
         //variables
         ArrayList<Account> Accounts = new ArrayList<Account>();
         ArrayList<Transaction> transactions = new ArrayList<Transaction>();
@@ -29,13 +28,27 @@ public class Main {
                     Transaction Newtrans = new Transaction(date,lineinput[1],lineinput[2],lineinput[3],Float.parseFloat(lineinput[4]));
                     transactions.add(Newtrans);
                     //check for new accounts
-                    if (Arrays.stream(Accounts))
+                    boolean Toexists = false;
+                    boolean Fromexists = false;
+                    for (int i = 0; i <Accounts.size();i++){
+                        //check from
+                        if (Objects.equals(lineinput[1],Accounts.get(i).getName())) {Fromexists = true;}
+                        //check To
+                        if (Objects.equals(lineinput[2],Accounts.get(i).getName())) {Toexists = true;}
+                    }
+                    //add new accounts
+                    if (!Fromexists){Accounts.add(new Account(lineinput[1],0));}
+                    if (!Toexists){Accounts.add(new Account(lineinput[2],0));}
+
                 }else {
                     firstskipped = true;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        for (int i = 0; i<Accounts.size(); i++){
+            System.out.println(Accounts.get(i).getName());
         }
         // generating accounts
 
