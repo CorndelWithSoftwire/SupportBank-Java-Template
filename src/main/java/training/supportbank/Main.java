@@ -1,13 +1,10 @@
 package training.supportbank;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.io.BufferedReader;
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String args[]) {
