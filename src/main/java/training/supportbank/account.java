@@ -9,4 +9,6 @@ public class account {
         this.name = name;
         this.balance = balance;
     }
+    //getters
+    public String getName() {return name;}
 }

@@ -3,11 +3,11 @@ import java.time.LocalDate;
 
 public class Transaction {
     //elements
-    protected LocalDate date;
-    protected String from;
-    protected String to;
-    protected String narrative;
-    protected float amount;
+    private LocalDate date;
+    private String from;
+    private String to;
+    private String narrative;
+    private float amount;
     //constructor
     public Transaction(LocalDate date, String from, String to, String narrative, float amount){
         this.date = date;
