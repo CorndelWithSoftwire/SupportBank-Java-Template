@@ -29,7 +29,9 @@ public class Main {
         try {
             JsonParser jsonParser = new JsonParser();
             Stream<Transaction> jsonTrans = jsonParser.readFile("src/main/java/training/supportbank/Transactions2013.json");
-            jsonTrans.forEach(Transaction -> transactions.add(Transaction));
+            jsonTrans.forEach(Transaction -> {transactions.add(Transaction);
+            });
+
         }catch (IOException e){
             e.printStackTrace();
         }
