@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String args[]) {
@@ -24,6 +25,14 @@ public class Main {
         ArrayList<Account> Accounts = new ArrayList<Account>();
         ArrayList<Transaction> transactions = new ArrayList<Transaction>();
         final DecimalFormat currency = new DecimalFormat("£0.00");
+        //load Json
+        try {
+            JsonParser jsonParser = new JsonParser();
+            Stream<Transaction> jsonTrans = jsonParser.readFile("src/main/java/training/supportbank/Transactions2013.json");
+            jsonTrans.forEach(Transaction -> transactions.add(Transaction));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
         //Load CSV
         String line = "";
         boolean firstSkippedCSV = false;
