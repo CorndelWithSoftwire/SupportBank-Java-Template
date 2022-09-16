@@ -1,15 +1,6 @@
 package training.supportbank;
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-
-import javax.sound.sampled.Line;
-import java.awt.*;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,7 +12,6 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String args[]) {
         //variables
-        String Line ;
         ArrayList<Account> Accounts = new ArrayList<Account>();
         ArrayList<Transaction> transactions = new ArrayList<Transaction>();
         final DecimalFormat currency = new DecimalFormat("£0.00");
@@ -36,9 +26,9 @@ public class Main {
             e.printStackTrace();
         }
         //Load CSV
-        String line = "";
         boolean firstSkippedCSV = false;
         try {
+            String line = "";
             BufferedReader Csvreader = new BufferedReader(new FileReader("src/main/java/training/supportbank/Transactions2014.csv"));
             while ((line = Csvreader.readLine()) != null) {
                 if (firstSkippedCSV) {
