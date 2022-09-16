@@ -1,7 +1,15 @@
 package training.supportbank;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+
+import javax.sound.sampled.Line;
 import java.awt.*;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,16 +20,17 @@ import java.util.Scanner;
 public class Main {
     public static void main(String args[]) {
         //variables
+        String Line ;
         ArrayList<Account> Accounts = new ArrayList<Account>();
         ArrayList<Transaction> transactions = new ArrayList<Transaction>();
         final DecimalFormat currency = new DecimalFormat("£0.00");
         //Load CSV
         String line = "";
-        boolean firstSkipped = false;
+        boolean firstSkippedCSV = false;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/main/java/training/supportbank/Transactions2014.csv"));
-            while ((line = reader.readLine()) != null) {
-                if (firstSkipped) {
+            BufferedReader Csvreader = new BufferedReader(new FileReader("src/main/java/training/supportbank/Transactions2014.csv"));
+            while ((line = Csvreader.readLine()) != null) {
+                if (firstSkippedCSV) {
                     //load into transactions
                     String[] lineinput = line.split(",");
                     String[] SplitDate = lineinput[0].split("/");
@@ -55,7 +64,7 @@ public class Main {
                     }
 
                 } else {
-                    firstSkipped = true;
+                    firstSkippedCSV = true;
                 }
             }
         } catch (IOException e) {
