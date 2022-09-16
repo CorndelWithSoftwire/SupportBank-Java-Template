@@ -48,38 +48,35 @@ public class Main {
                     LocalDate date = LocalDate.of(Integer.valueOf(SplitDate[2]), Integer.valueOf(SplitDate[1]), Integer.valueOf(SplitDate[0]));
                     Transaction Newtrans = new Transaction(date, lineinput[1], lineinput[2], lineinput[3], Float.parseFloat(lineinput[4]));
                     transactions.add(Newtrans);
-                    //check for new accounts
-                    boolean Toexists = false;
-                    boolean Fromexists = false;
-                    for (int i = 0; i < Accounts.size(); i++) {
-                        //check from
-                        if (Objects.equals(lineinput[1], Accounts.get(i).getName())) {
-                            Fromexists = true;
-                            Accounts.get(i).Addbal(-1 * Float.parseFloat(lineinput[4]));
-                        }
-                        //check To
-                        if (Objects.equals(lineinput[2], Accounts.get(i).getName())) {
-                            Toexists = true;
-                            Accounts.get(i).Addbal(Float.parseFloat(lineinput[4]));
-                        }
-                    }
-                    //add new accounts & update balances
-
-                    if (!Fromexists) {
-                        Accounts.add(new Account(lineinput[1], 0));
-                        Accounts.get(Accounts.size() - 1).Addbal(-1 * Float.parseFloat(lineinput[4]));
-                    }
-                    if (!Toexists) {
-                        Accounts.add(new Account(lineinput[2], 0));
-                        Accounts.get(Accounts.size() - 1).Addbal(Float.parseFloat(lineinput[4]));
-                    }
-
                 } else {
                     firstSkippedCSV = true;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        //NEW ACCOUNT CREATION:
+        boolean Toexists = false;
+        boolean Fromexists = false;
+        for(int i = 0; i < transactions.size(); i ++){
+            Toexists = false;
+            Fromexists = false;
+            for (int j = 0; j < Accounts.size(); j ++){
+                if (!Toexists && Objects.equals(transactions.get(i).getTo(), Accounts.get(j).getName())){
+                    Toexists = true;
+                    Accounts.get(j).Addbal(transactions.get(i).getAmount());
+                }
+                if (!Fromexists && Objects.equals(transactions.get(i).getFrom(), Accounts.get(j).getName())){
+                    Fromexists = true;
+                    Accounts.get(j).Addbal(-1*transactions.get(i).getAmount());
+                }
+            }
+            if (!Toexists){
+                Accounts.add(new Account(transactions.get(i).getTo(),transactions.get(i).getAmount()));
+            }
+            if (!Fromexists){
+                Accounts.add(new Account(transactions.get(i).getFrom(),-1*transactions.get(i).getAmount()));
+            }
         }
         Scanner myScan = new Scanner(System.in);
         String menuOption = "";
